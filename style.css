@@ -1,0 +1,118 @@
+body{
+    background-image: url("elliott-engelmann-DjlKxYFJlTc-unsplash\ \(1\).jpg");
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5rem;
+    color: white;
+}
+
+
+.play{
+    margin-top: 10rem;
+}
+.player-names{
+    font-size: 2rem;
+    display: flex;
+    gap: 5rem;
+}
+input{
+    padding:1rem;
+    border-radius: 5px;
+}
+
+.test{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3rem;
+}
+.start{
+    height: 5rem;
+    width: 20rem;
+    cursor: pointer;
+    border: none;
+    background-color: #023e8a;
+    color:#aaa;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+.start:hover,
+.start:active{
+    background-color: #0077b6;
+    color: #fff;
+}
+.start:active{
+    transform: translateY(4px);
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.players{
+    display: flex;
+    gap: 30rem;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+}
+
+.player-side,
+.computer-side{
+    display: flex;
+    gap: 1rem;
+}
+
+.board-container{
+    display: grid;
+    grid-template-rows: repeat(3,1fr);
+    grid-template-columns: repeat(3,1fr);
+    row-gap: 1rem;
+    column-gap: 1rem;
+    
+}
+
+.game-box{
+    height: 12rem;
+    width: 12rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* padding: 13rem 15rem; */
+    /* border: 3px solid #90e0ef; */
+    border: 3px solid;
+    border-image: linear-gradient(to bottom left, #03045e, #48cae4) 1;
+    cursor: pointer;
+    font-size: 5rem;
+    font-weight: bold;
+    
+}
+.reset{
+    padding: 1rem 3rem;
+    cursor: pointer;
+    border: none;
+    background-color: #023e8a;
+    color:#aaa;
+    font-weight: bold;
+    transition: all 0.3s;
+    border-radius: 5px;
+}
+.reset:hover,
+.reset:active{
+    background-color: #0077b6;
+    color: #fff;
+}
+.reset:active{
+    transform: translateY(4px);
+}
+
+.hidden{
+    display: none;
+}
