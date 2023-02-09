@@ -9,14 +9,20 @@ const playerOneScore = document.querySelector(".player1-score");
 const playerTwoScore = document.querySelector(".player2-score");
 const cells = document.querySelectorAll(".game-box");
 const statusText = document.querySelector("#status-text");
+const statusTextColor = document.querySelector(".status-text");
 const restartBtn = document.querySelector(".reset");
-let score = 0;
+let scorePlayerOne = 0;
+let scorePlayerTwo = 0;
+
 start.addEventListener("click", function (e) {
-  e.preventDefault();
-  play.classList.add("hidden");
-  container.classList.remove("hidden");
-  playerOneName.textContent = `${playerOneInput.value}: `;
-  playerTwoName.textContent = `${playerTwoInput.value}: `;
+  if (playerOneInput.value != "" && playerTwoInput.value != "") {
+    e.preventDefault();
+    play.classList.add("hidden");
+    container.classList.remove("hidden");
+    playerOneName.textContent = `${playerOneInput.value}: `;
+    playerTwoName.textContent = `${playerTwoInput.value}: `;
+    updateStatusText();
+  }
 });
 
 const winConditions = [
@@ -40,6 +46,7 @@ function initializeGame() {
   restartBtn.addEventListener("click", restartGame);
   statusText.textContent = `${currentPlayer}'s turn`;
   running = true;
+  updateStatusText();
 }
 function cellClicked() {
   const cellIndex = this.getAttribute("cellIndex");
@@ -58,7 +65,7 @@ function updateCell(cell, index) {
 }
 function changePlayer() {
   currentPlayer = currentPlayer == "X" ? "O" : "X";
-  statusText.textContent = `${currentPlayer}'s turn`;
+  updateStatusText();
 }
 function checkWinner() {
   let roundWon = false;
@@ -77,18 +84,39 @@ function checkWinner() {
     }
   }
   if (roundWon) {
+    options = ["", "", "", "", "", "", "", "", ""];
+    cells.forEach((cell) => (cell.textContent = ""));
     statusText.textContent = `${currentPlayer} wins!`;
-    running = false;
+    statusTextColor.classList.add("neon");
+    if (currentPlayer == "X") {
+      scorePlayerOne++;
+      playerOneScore.textContent = scorePlayerOne;
+    } else {
+      scorePlayerTwo++;
+      playerTwoScore.textContent = scorePlayerTwo;
+    }
   } else if (!options.includes("")) {
     statusText.textContent = `Draw`;
+    statusTextColor.classList.remove("neon");
   } else {
     changePlayer();
+    statusTextColor.classList.remove("neon");
   }
 }
 function restartGame() {
   currentPlayer = "X";
   options = ["", "", "", "", "", "", "", "", ""];
-  statusText.textContent = `${currentPlayer}'s turn`;
+  updateStatusText();
   cells.forEach((cell) => (cell.textContent = ""));
   running = true;
+  statusTextColor.classList.remove("neon");
+  location.reload();
+}
+
+function updateStatusText() {
+  if (currentPlayer === "X") {
+    statusText.textContent = `${playerOneInput.value}'s turn`;
+  } else {
+    statusText.textContent = `${playerTwoInput.value}'s turn`;
+  }
 }
