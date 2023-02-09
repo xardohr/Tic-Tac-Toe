@@ -86,7 +86,7 @@ function checkWinner() {
   if (roundWon) {
     options = ["", "", "", "", "", "", "", "", ""];
     cells.forEach((cell) => (cell.textContent = ""));
-    statusText.textContent = `${currentPlayer} wins!`;
+    updateStatusTextWin();
     statusTextColor.classList.add("neon");
     if (currentPlayer == "X") {
       scorePlayerOne++;
@@ -98,6 +98,10 @@ function checkWinner() {
   } else if (!options.includes("")) {
     statusText.textContent = `Draw`;
     statusTextColor.classList.remove("neon");
+    currentPlayer = "X";
+    options = ["", "", "", "", "", "", "", "", ""];
+    cells.forEach((cell) => (cell.textContent = ""));
+    updateStatusText();
   } else {
     changePlayer();
     statusTextColor.classList.remove("neon");
@@ -118,5 +122,12 @@ function updateStatusText() {
     statusText.textContent = `${playerOneInput.value}'s turn`;
   } else {
     statusText.textContent = `${playerTwoInput.value}'s turn`;
+  }
+}
+function updateStatusTextWin() {
+  if (currentPlayer === "X") {
+    statusText.textContent = `${playerOneInput.value} WON the round`;
+  } else {
+    statusText.textContent = `${playerTwoInput.value} WON the round`;
   }
 }
